@@ -12,7 +12,7 @@ public class DBConfig
         {
             Class.forName("com.mysql.jdbc.Driver");
             String connectionUrl = "jdbc:mysql://localhost:3306/studentdb";
-            mySqlConnection = DriverManager.getConnection(connectionUrl, "Legaci", "theLegaci0");
+            mySqlConnection = DriverManager.getConnection(connectionUrl, "USERNAME", "PASSWORD");
         }
         catch(Exception ex)
         {
