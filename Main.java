@@ -56,41 +56,59 @@ public class Main
                 con = DBConfig.getMySqlConnection();
             }
 
-            System.out.println("You are now connected to the student database. You may do any of the following: ");
-            System.out.println("1. Display all students and their information.");
-            System.out.println("2. Create a new student.");
-            System.out.println("3. Update a student's MAJOR or ADVISOR.");
-            System.out.println("4. Delete a student.");
-            System.out.println("5. Display students by MAJOR, GPA, or ADVISOR.");
-            System.out.print("Please pick an action to perform: ");
+            boolean keepGoing = true;
 
-            while(keyboard.hasNextInt() == false)
-            {
-                System.out.print("That is not a valid option, try again: ");
+            do {
+                int userChoice = 0;
+
+                System.out.println("\nYou are now connected to the student database. You may do any of the following: ");
+                System.out.println("1. Display all students and their information.");
+                System.out.println("2. Create a new student.");
+                System.out.println("3. Update a student's MAJOR or ADVISOR.");
+                System.out.println("4. Delete a student.");
+                System.out.println("5. Display students by MAJOR, GPA, or ADVISOR.");
+                System.out.println("6. Exit the program.");
+                System.out.print("Please pick an action to perform: ");
+
+                while(userChoice == 0)
+                {
+                    if(keyboard.hasNextInt() == false)
+                    {
+                        System.out.print("That is not a valid input, please try again.");
+                        keyboard.nextLine();
+                    }
+                    else userChoice = keyboard.nextInt();
+                    if(userChoice > 6)
+                    {
+                        System.out.print("That is not a valid menu option, please try again: ");
+                        userChoice = 0;
+                        keyboard.nextLine();
+                    }
+                }
+
+                switch (userChoice) {
+                    case 1:
+                        SQLStmts.SQLQuery();
+                        break;
+                    case 2:
+                        SQLStmts.SQLInsert();
+                        break;
+                    case 3:
+                        SQLStmts.SQLUpdate();
+                        break;
+                    case 4:
+                        SQLStmts.SQLDelete();
+                        break;
+                    case 5:
+                        SQLStmts.SQLDisplayBy();
+                        break;
+                    case 6:
+                        keepGoing = false;
+                        break;
+                }
             }
-            int userChoice = keyboard.nextInt();
-
-            switch(userChoice){
-
-                case 1:
-                    SQLStmts.SQLQuery();
-                    break;
-                case 2:
-                    SQLStmts.SQLInsert();
-                    break;
-                case 3:
-                    SQLStmts.SQLUpdate();
-                    break;
-                case 4:
-                    SQLStmts.SQLDelete();
-                    break;
-                case 5:
-                    SQLStmts.SQLDisplayBy();
-            }
+            while(keepGoing == true);
         }
-
-
-
         catch(Exception ex) {
             ex.printStackTrace(); }
         finally {
