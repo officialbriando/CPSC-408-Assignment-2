@@ -7,6 +7,7 @@ public class SQLStmts
 {
     static Connection con = DBConfig.getMySqlConnection();
     static Scanner keyboard = new Scanner(System.in);
+    static String foo;
 
     public static void SQLQuery()
     {
@@ -36,12 +37,14 @@ public class SQLStmts
                                                                     "VALUES(?,?,?,?,?);");
 
             pstInsert.clearParameters();
+            keyboard.nextLine();
             System.out.print("\n Enter the student's FIRST NAME: ");
             pstInsert.setString(1, keyboard.nextLine());
             System.out.print("\n Enter the student's LAST NAME: ");
             pstInsert.setString(2, keyboard.nextLine());
             System.out.print("\n Enter the student's GPA: ");
             pstInsert.setDouble(3, keyboard.nextDouble());
+            keyboard.nextLine();
             System.out.print("\n Enter the student's MAJOR: ");
             pstInsert.setString(4, keyboard.nextLine());
             System.out.print("\n Enter the student's FACULTY ADVISOR: ");
@@ -74,6 +77,7 @@ public class SQLStmts
                     pstUpdateMajor.setInt(2, studentID);
 
                     System.out.print("\n Enter the student's updated MAJOR: ");
+                    keyboard.nextLine();
                     pstUpdateMajor.setString(1, keyboard.nextLine());
                     pstUpdateMajor.executeUpdate();
                     break;
@@ -83,6 +87,7 @@ public class SQLStmts
                     pstUpdateAdvisor.setInt(2, studentID);
 
                     System.out.print("\n Enter the student's updated FACULTY ADVISOR: ");
+                    keyboard.nextLine();
                     pstUpdateAdvisor.setString(1, keyboard.nextLine());
                     pstUpdateAdvisor.executeUpdate();
                     break;
@@ -106,6 +111,8 @@ public class SQLStmts
             pstDelete.clearParameters();
             pstDelete.setInt(1, studentID);
             pstDelete.executeUpdate();
+
+            System.out.println("The student with your given ID has been deleted.\n");
         }
         catch(Exception e) {
             e.printStackTrace(); }
@@ -146,6 +153,7 @@ public class SQLStmts
                     PreparedStatement QueryMAJOR = con.prepareStatement("SELECT * FROM student WHERE Major = ?;");
                     QueryMAJOR.clearParameters();
                     System.out.print("\n Enter the MAJOR to display: ");
+                    keyboard.nextLine();
                     QueryMAJOR.setString(1, keyboard.nextLine());
 
                     System.out.println("Here are the entries that match your given input: \n");
@@ -165,6 +173,7 @@ public class SQLStmts
                     PreparedStatement QueryADVISOR = con.prepareStatement("SELECT * FROM student WHERE FacultyAdvisor = ?;");
                     QueryADVISOR.clearParameters();
                     System.out.print("\n Enter the FACULTY ADVISOR to display: ");
+                    keyboard.nextLine();
                     QueryADVISOR.setString(1, keyboard.nextLine());
 
                     System.out.println("Here are the entries that match your given input: \n");
