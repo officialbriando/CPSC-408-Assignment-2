@@ -74,11 +74,11 @@ public class Main
                 {
                     if(keyboard.hasNextInt() == false)
                     {
-                        System.out.print("That is not a valid input, please try again.");
+                        System.out.print("That is not a valid input, please try again: ");
                         keyboard.nextLine();
                     }
                     else userChoice = keyboard.nextInt();
-                    if(userChoice > 6)
+                    if(userChoice > 6 || userChoice < 0)
                     {
                         System.out.print("That is not a valid menu option, please try again: ");
                         userChoice = 0;
@@ -108,6 +108,7 @@ public class Main
                 }
             }
             while(keepGoing == true);
+
         }
         catch(Exception ex) {
             ex.printStackTrace(); }
