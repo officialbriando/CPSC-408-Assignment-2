@@ -43,7 +43,23 @@ public class SQLStmts
             System.out.print("\n Enter the student's LAST NAME: ");
             pstInsert.setString(2, keyboard.nextLine());
             System.out.print("\n Enter the student's GPA: ");
-            pstInsert.setDouble(3, keyboard.nextDouble());
+            double GPAinput = 0;
+            while(GPAinput == 0)
+            {
+                if(keyboard.hasNextDouble()== false)
+                {
+                    System.out.print("That is not a valid value, please try again: ");
+                    keyboard.nextLine();
+                }
+                else GPAinput = keyboard.nextDouble();
+                if(GPAinput > 4 || GPAinput < 0)
+                {
+                    System.out.print("That is not a valid value, please try again: ");
+                    GPAinput = 0;
+                    keyboard.nextLine();
+                }
+            }
+            pstInsert.setDouble(3, GPAinput);
             keyboard.nextLine();
             System.out.print("\n Enter the student's MAJOR: ");
             pstInsert.setString(4, keyboard.nextLine());
@@ -134,7 +150,24 @@ public class SQLStmts
                     PreparedStatement QueryGPA = con.prepareStatement("SELECT * FROM student WHERE GPA = ?;");
                     QueryGPA.clearParameters();
                     System.out.print("\n Enter the GPA to display: ");
-                    QueryGPA.setDouble(1, keyboard.nextDouble());
+
+                    double GPA = 0;
+                    while(GPA == 0)
+                    {
+                        if(keyboard.hasNextDouble()== false)
+                        {
+                            System.out.print("That is not a valid value, please try again: ");
+                            keyboard.nextLine();
+                        }
+                        else GPA = keyboard.nextDouble();
+                        if(GPA > 4 || GPA < 0)
+                        {
+                            System.out.print("That is not a valid value, please try again: ");
+                            GPA = 0;
+                            keyboard.nextLine();
+                        }
+                    }
+                    QueryGPA.setDouble(1, GPA);
 
                     System.out.println("Here are the entries that match your given input: \n");
 
